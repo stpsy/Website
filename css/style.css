@@ -1,0 +1,635 @@
+/* ============================================================
+   Suzanne Thomas — Psychologue clinicienne
+   Feuille de styles principale
+   ============================================================ */
+
+:root {
+  --bleu-profond: #2c5a72;
+  /* Titres : plus foncés que le bleu courant, les principaux le plus */
+  --titre-principal: #143240;
+  --titre-secondaire: #1e4459;
+  --bleu-moyen: #5b93ad;
+  --bleu-clair: #a8d0e2;
+  --bleu-pale: #99bfd0;
+  --texte: #33454e;
+  --texte-doux: #5d707a;
+  --blanc: #f6f1f1;
+  --ombre: 0 10px 40px rgba(44, 90, 114, 0.13);
+  --ombre-douce: 0 4px 18px rgba(44, 90, 114, 0.09);
+  --rayon: 4px;
+  --largeur: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Lato", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--texte);
+  background: var(--bleu-pale);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Fond aquarelle — page d'accueil uniquement ----------
+   Appliqué via <body class="page-accueil"> sur index.html.
+   Les autres pages gardent le bleu uni.                            */
+
+.page-accueil {
+  background-color: var(--bleu-pale);
+  background-image:
+    /* 1. grain du papier, qui accroche le pigment */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23p)' opacity='0.30'/%3E%3C/svg%3E"),
+    /* 2. réserves : les zones où le pigment s'est retiré en séchant */
+    radial-gradient(ellipse 46% 38% at 12% 16%, rgba(236,246,250,0.90), transparent 68%),
+    radial-gradient(ellipse 40% 34% at 88% 26%, rgba(236,246,250,0.72), transparent 68%),
+    radial-gradient(ellipse 52% 40% at 68% 84%, rgba(240,249,252,0.66), transparent 70%),
+    /* 3. dépôts de pigment, plus soutenus */
+    radial-gradient(ellipse 42% 34% at 26% 62%, rgba(88,146,175,0.42), transparent 70%),
+    radial-gradient(ellipse 38% 30% at 84% 56%, rgba(104,159,185,0.38), transparent 70%),
+    radial-gradient(ellipse 56% 42% at 46% 6%, rgba(116,172,198,0.34), transparent 72%),
+    /* 4. lavis de fond */
+    linear-gradient(160deg, #a6cad9 0%, #bcdbe6 42%, #8db8cc 100%);
+  background-blend-mode: multiply, normal, normal, normal, normal, normal, normal, normal;
+  background-size: 220px 220px, cover, cover, cover, cover, cover, cover, cover;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  /* fixé : le lavis reste cadré sur l'écran au lieu de s'étirer sur toute la hauteur */
+  background-attachment: fixed;
+}
+
+/* ---------- Fond de la page « Qui suis-je ? » ----------
+   Appliqué via <body class="page-qui-suis-je">.               */
+
+.page-qui-suis-je {
+  background: #faf6f0;
+}
+
+/* Portrait en haut à droite, remontant sur le bandeau.
+   En flottant : le texte contourne la photo, il n'est jamais recouvert. */
+.portrait {
+  float: right;
+  width: clamp(140px, 21vw, 215px);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: center 22%;
+  margin: -104px 0 26px 34px;
+  border: 6px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 26px rgba(60, 70, 60, 0.28);
+  position: relative;
+  z-index: 3;
+}
+
+/* Bandeau « Qui suis-je ? » : lavis bleu / vert olive / jaune pâle,
+   et hauteur réduite. */
+.page-qui-suis-je .bandeau {
+  background-color: #6f8fbe;
+  background-image:
+    /* grain du papier */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23s)' opacity='0.20'/%3E%3C/svg%3E"),
+    /* jaune pâle et vert olive, en nuées latérales */
+    radial-gradient(ellipse 34% 70% at 16% 62%, rgba(214,218,170,0.62), transparent 70%),
+    radial-gradient(ellipse 32% 62% at 38% 80%, rgba(139,162,104,0.52), transparent 70%),
+    radial-gradient(ellipse 30% 58% at 76% 34%, rgba(150,178,158,0.44), transparent 70%),
+    radial-gradient(ellipse 26% 54% at 92% 72%, rgba(208,214,172,0.42), transparent 70%),
+    /* lavis de fond, bleu aux extrémités */
+    linear-gradient(102deg, #4b71ad 0%, #6b8cc0 26%, #8ba691 54%, #6f8fbe 80%, #4d73af 100%);
+  background-blend-mode: multiply, normal, normal, normal, normal, normal;
+  background-size: 200px 200px, cover, cover, cover, cover, cover;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  padding: 58px 24px 68px;
+}
+
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  font-weight: 400;
+  color: var(--titre-principal);
+  margin: 0 0 0.5em;
+  letter-spacing: 0.01em;
+}
+
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--bleu-moyen); }
+
+/* ---------- En-tête / navigation ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(44, 90, 114, 0.08);
+}
+
+.nav-inner {
+  max-width: var(--largeur);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+}
+
+.nav-marque {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--bleu-profond);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(44, 90, 114, 0.25);
+  border-radius: var(--rayon);
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  color: var(--bleu-profond);
+  cursor: pointer;
+}
+
+.nav-liens {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-liens a {
+  text-decoration: none;
+  color: var(--texte-doux);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-liens a:hover,
+.nav-liens a.actif {
+  color: var(--bleu-profond);
+  border-bottom-color: var(--bleu-clair);
+}
+
+/* ---------- Héros ---------- */
+
+.hero {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 24px;
+  background-image: url("https://i.ebayimg.com/images/g/FhgAAeSwWLNo95ex/s-l1200.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 60, 76, 0.18);
+}
+
+.hero-carte {
+  position: relative;
+  z-index: 1;
+  background: var(--blanc);
+  padding: 54px 60px;
+  text-align: center;
+  box-shadow: var(--ombre);
+  max-width: 560px;
+  width: 100%;
+}
+
+.hero-carte h1 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  margin-bottom: 0.15em;
+  line-height: 1.1;
+}
+
+.hero-sous-titre {
+  font-size: clamp(0.9rem, 2.6vw, 1.15rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--titre-secondaire);
+  margin: 0;
+}
+
+.hero-filet {
+  width: 56px;
+  height: 1px;
+  background: var(--bleu-clair);
+  border: 0;
+  margin: 26px auto;
+}
+
+/* ---------- Panneaux ---------- */
+
+.section { padding: 0 24px; }
+
+.panneau {
+  max-width: var(--largeur);
+  margin: 60px auto 0;
+  position: relative;
+  z-index: 2;
+  background: var(--blanc);
+  padding: 60px clamp(28px, 6vw, 76px);
+  box-shadow: var(--ombre-douce);
+}
+
+.panneau + .panneau,
+.panneau-aquarelle { margin-top: 46px; }
+
+.panneau h2 {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  margin-bottom: 0.7em;
+}
+
+.intro-forte {
+  font-size: 1.08rem;
+  color: var(--bleu-profond);
+  margin-bottom: 0.6em;
+}
+
+.liste-puces {
+  list-style: none;
+  margin: 0 0 1.6em;
+  padding: 0;
+}
+
+.liste-puces > li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 0.9em;
+}
+
+.liste-puces > li::before {
+  content: "•";
+  position: absolute;
+  left: 6px;
+  color: var(--bleu-moyen);
+  font-size: 1.2em;
+  line-height: 1.4;
+}
+
+/* Lignes secondaires, sans puce, alignées sous le texte de la puce */
+.sous-lignes {
+  list-style: none;
+  margin: 0.5em 0 0.9em;
+  padding: 0 0 0 26px;
+}
+
+.sous-lignes li { margin-bottom: 0.35em; }
+
+/* Titre de panneau centré */
+.titre-centre { text-align: center; }
+
+.paragraphes-espaces p { margin-bottom: 1.15em; }
+
+.mise-en-avant {
+  margin-top: 1.8em;
+  padding: 22px 28px;
+  border-left: 3px solid var(--bleu-clair);
+  background: var(--bleu-pale);
+  color: var(--bleu-profond);
+  font-size: 1.02rem;
+}
+
+/* ---------- Panneau aquarelle ---------- */
+
+.panneau-aquarelle {
+  max-width: var(--largeur);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  padding: 58px clamp(28px, 6vw, 76px);
+  box-shadow: var(--ombre-douce);
+  color: var(--bleu-profond);
+  background-color: #cfe6f4;
+  background-image:
+    radial-gradient(ellipse 60% 45% at 18% 22%, rgba(255,255,255,0.85), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 78% 30%, rgba(255,255,255,0.65), transparent 70%),
+    radial-gradient(ellipse 70% 55% at 45% 85%, rgba(126,180,214,0.45), transparent 72%),
+    radial-gradient(ellipse 45% 40% at 88% 78%, rgba(255,255,255,0.6), transparent 70%),
+    linear-gradient(140deg, #bcdcf0 0%, #e2f1fa 45%, #b7d9ef 100%);
+}
+
+.panneau-aquarelle h2 { color: var(--titre-principal); }
+
+.grille-infos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 34px 44px;
+}
+
+.bloc-info h3 {
+  font-family: "Lato", "Segoe UI", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--titre-secondaire);
+  opacity: 0.85;
+  margin-bottom: 0.6em;
+}
+
+.bloc-info p { line-height: 1.6; }
+
+.tel-lien {
+  font-size: 1.2rem;
+  color: var(--bleu-profond);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(44, 90, 114, 0.3);
+}
+
+.tel-lien:hover { border-bottom-color: var(--bleu-profond); }
+
+.urgence {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(44, 90, 114, 0.2);
+  font-size: 0.98rem;
+}
+
+.urgence strong { font-weight: 700; }
+
+/* ---------- Panneaux aquarelle rose-pêche-jaune — page d'accueil ----------
+   Cible le cadre « Suzanne Thomas » et le panneau « Bienvenue ! ».
+   Scopé à .page-accueil : les panneaux des autres pages sont intacts.
+   Ne touche ni au texte, ni aux boutons.                                    */
+
+.page-accueil .hero-carte {
+  background-color: #fdf4ec;
+  background-image:
+    /* 1. grain du papier */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='q'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23q)' opacity='0.14'/%3E%3C/svg%3E"),
+    /* 2. cœur magenta, le point le plus soutenu du lavis */
+    radial-gradient(ellipse 42% 34% at 58% 10%, rgba(230,92,166,0.24), transparent 68%),
+    /* 3. rose dilué autour */
+    radial-gradient(ellipse 55% 42% at 20% 12%, rgba(240,170,200,0.30), transparent 70%),
+    /* 4. pêche au centre */
+    radial-gradient(ellipse 60% 40% at 88% 50%, rgba(242,190,138,0.32), transparent 72%),
+    /* 5. jaune chaud en bas */
+    radial-gradient(ellipse 62% 42% at 14% 92%, rgba(246,222,132,0.42), transparent 72%),
+    /* 6. lavis de fond : rose en haut, jaune en bas */
+    linear-gradient(168deg, #fbe4ee 0%, #fdeadb 38%, #fdf1d8 68%, #fbf3cf 100%);
+  background-blend-mode: multiply, normal, normal, normal, normal, normal;
+  background-size: 200px 200px, cover, cover, cover, cover, cover;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* ---------- Panneau « Bienvenue ! » : lavis orangé ----------
+   Teinte distincte du cadre du héros, qui garde son rosé.        */
+
+.page-accueil .panneau {
+  background: #efe7dc;
+}
+
+/* Encadré de conclusion, accordé au lavis orangé du panneau.
+   Texte et puces reprennent le bleu du bouton « Prendre rendez-vous ». */
+.page-accueil .mise-en-avant {
+  background: rgba(250, 226, 192, 0.72);
+  border-left-color: #d2702f;
+  color: var(--bleu-profond);
+}
+
+.page-accueil .liste-puces > li::before { color: var(--bleu-profond); }
+
+/* ---------- Boutons ---------- */
+
+.bouton {
+  display: inline-block;
+  padding: 15px 34px;
+  background: var(--bleu-profond);
+  color: var(--blanc);
+  text-decoration: none;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: var(--rayon);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(44, 90, 114, 0.22);
+}
+
+.bouton:hover {
+  background: #21485c;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(44, 90, 114, 0.3);
+}
+
+.bouton-clair {
+  background: var(--blanc);
+  color: var(--bleu-profond);
+}
+
+.bouton-clair:hover {
+  background: #f4fbff;
+  color: var(--bleu-profond);
+}
+
+.hero-carte .bouton { margin-top: 30px; }
+
+.zone-bouton { margin-top: 30px; }
+
+/* Bouton discret, en fil de texte */
+.bouton-petit {
+  padding: 9px 20px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  box-shadow: 0 3px 10px rgba(44, 90, 114, 0.18);
+}
+
+/* ---------- Liste des approches (page Qui suis-je) ---------- */
+
+.liste-approches {
+  list-style: none;
+  margin: 0 0 1.8em;
+  padding: 0;
+}
+
+.liste-approches > li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 1.7em;
+}
+
+.liste-approches > li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  color: var(--bleu-moyen);
+}
+
+.liste-approches p { margin-bottom: 0.7em; }
+
+.mention-rpps {
+  margin-top: 2.4em;
+  padding-top: 1.2em;
+  border-top: 1px solid rgba(140, 105, 60, 0.22);
+  font-size: 0.9rem;
+  color: var(--texte-doux);
+}
+
+/* Cible d'ancre : dégagée de la barre de navigation fixe */
+.ancre-approche {
+  scroll-margin-top: 100px;
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-top: 1.8em;
+}
+
+/* Accroche sous le titre d'une approche */
+/* Accroche placée sur la même ligne que le titre de l'approche */
+.accroche-en-ligne {
+  font-weight: 600;
+  font-size: 0.82em;
+  color: var(--titre-secondaire);
+}
+
+.accroche-approche {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--titre-secondaire);
+  margin-top: -0.4em;
+  margin-bottom: 1.4em;
+}
+
+/* Sous-titre de rubrique à l'intérieur d'une approche */
+.titre-section {
+  position: relative;
+  scroll-margin-top: 100px;
+  font-family: "Lato", "Segoe UI", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--titre-principal);
+  margin: 2.8em 0 1em;
+  padding-left: 36px;
+}
+
+/* Tiret d'accent : détache le sous-titre du corps de texte */
+.titre-section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 24px;
+  height: 2px;
+  background: var(--bleu-moyen);
+}
+
+.liste-liens {
+  list-style: none;
+  margin: 0 0 1.6em;
+  padding: 0;
+}
+
+.liste-liens li { margin-bottom: 0.5em; }
+
+.liste-liens a {
+  color: var(--bleu-profond);
+  text-decoration: none;
+  border-bottom: 1px solid var(--bleu-clair);
+  padding-bottom: 1px;
+}
+
+.liste-liens a:hover { border-bottom-color: var(--bleu-profond); }
+
+/* ---------- Pied de page ---------- */
+
+.site-footer {
+  background: var(--bleu-profond);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 46px 24px;
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  max-width: var(--largeur);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer a { color: var(--bleu-clair); text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+/* ---------- Bandeau de page intérieure ---------- */
+
+.bandeau {
+  background:
+    linear-gradient(rgba(30, 60, 76, 0.35), rgba(30, 60, 76, 0.35)),
+    url("https://i.ebayimg.com/images/g/FhgAAeSwWLNo95ex/s-l1200.jpg") center / cover;
+  padding: 110px 24px 130px;
+  text-align: center;
+}
+
+.bandeau h1 {
+  color: var(--blanc);
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  margin: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .nav-toggle { display: block; }
+
+  .nav-liens {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--blanc);
+    padding: 10px 24px 20px;
+    box-shadow: var(--ombre-douce);
+  }
+
+  .nav-liens.ouvert { display: flex; }
+
+  .nav-liens a {
+    display: block;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(44, 90, 114, 0.07);
+  }
+
+  .site-header { position: relative; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .hero { min-height: 460px; padding: 70px 18px; }
+  .hero-carte { padding: 38px 26px; }
+  .panneau, .panneau-aquarelle { padding: 42px 24px; }
+  .panneau { margin-top: 40px; }
+
+  /* Sur mobile la photo ne flotte plus : trop étroit pour que le texte
+     la contourne proprement, et le débord risquerait le titre du bandeau. */
+  .portrait {
+    float: none;
+    display: block;
+    width: min(190px, 58%);
+    margin: -80px auto 28px;
+  }
+}
