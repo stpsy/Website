@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://suzannethomas-psychologue-limoges.fr/sitemap.xml
